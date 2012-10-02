@@ -1,0 +1,53 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <title>Resolve tinyulr into a full link</title>
+    <meta name="keywords" content="tinyurl, url, link, resolve, blocked, follow" />
+    <meta name="description" content="It will resolve a tinyurl into a full URL without clicking on a link (or any other shortener-service)" />
+    <style type="text/css"> <!--
+     BODY {margin: 0px;background-color: white;font-family: Georgia, sans-serif;font-size: 14px;}
+     #horizon { position: absolute;top: 50%;left: 0px;width: 100%;height: 1px;overflow: visible;visibility: visible;display: block;}
+     #content { margin-left: -250px;position: absolute;top: -170px;left: 50%;width: 500px;height: 500px;visibility: visible;text-align:center;}  
+     #bottom { position: absolute;bottom: 0px;left: 0px;width: 100%;height: 50px;visibility: visible;display: block;background-color: #11303D;color: white;font-family: Tahoma, sans-serif;font-size: 12px;text-align: center;padding-top:12px;}
+     #error {border: 2px solid orange;background-color:lightYellow; width: 200px;margin:20px auto;padding:5px;}
+     a, a:link, a:active,a:visited {color: steelblue;text-decoration: underline;}
+     a {outline:none;}
+     #bottom a, #bottom a:link, #bottom a:active, #bottom a:visited {color: lightblue;text-decoration: underline;}
+     #bookmarklet {font-size:11px;color:grey;margin-top:50px}
+    --></style>
+  </head>
+  <body>
+    <div id="horizon">
+    <div id="content">
+     %if new:
+       <small><a href="${old}">${old}</a></small>  &rarr;<br/>
+       <div id="error"><strong><a href="${new}">${new}</a></strong></div>
+     %else:
+       <h3>copy & paste a shortened link:</h3>
+     %endif
+     
+     %if message:
+       <div id="error">${message}</div>
+     %endif
+     
+     <form action="">
+       <input type="text" name="u" %if message: value="${old}" %endif>
+       <input type="submit" value="resolve it!">
+     </form>
+<div id="bookmarklet">
+<em>Or copy & paste a sample link: <a href="http://tinyurl.com/8k48u2t">http://tinyurl.com/8k48u2t</a></em><br/><br/>
+<em>Click and drag the following link to your Bookmarks toolbar:</em>
+<blockquote><strong>Bookmarklet: <a href="javascript:for(var i=0;i<document.links.length;i++)if((document.links[i].href.length<27)&&(/^http:\/\/\w+\.\w+\/\w+/.test(document.links[i].href)))document.links[i].href='${url}?u='+encodeURIComponent(document.links[i].href);void(0)"  onmouseover="javascript:window.status='';return true" onclick="return false">NoTiny!</a></strong></blockquote>
+<em>When you will be clicking on this link in your bookmarks, all shortened links on an open page (like on Twitter) will be replaced with full URLs.</em>
+</div>
+     </div>
+     </div>
+     <div id="bottom">
+     This service resolves a shorterned URL into a full URL without clicking on a link (or any other shortener-service).
+     <br/>If you've got tinyurl blocked - use this tool. Also you could check what is hidden behind a shorten URL. 
+     <br/>by <a href="http://www.pleso.net">pleso.net</a>, <a href="http://www.pleso.net/en/contacts/">have an idea?</a>
+     </div>
+  </body>
+</html>

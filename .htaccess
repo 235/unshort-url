@@ -1,0 +1,7 @@
+#sample htaccess
+PythonPath "['/var/www/virtual/9p.org.ua/htdocs/r'] + sys.path"
+SetHandler python-program
+PythonHandler cherrypy._cpmodpy::handler
+PythonOption cherrypy.setup resolve_tinyurl::setup_server
+
+PythonDebug On

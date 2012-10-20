@@ -3,13 +3,15 @@ import cherrypy
 import urllib
 import mako
 
-TPATH = '/var/www/virtual/9p.org.ua/htdocs/r/templates/'
-URL = 'http://9p.org.ua/r/'
+import os
+TPATH = os.path.dirname(os.path.realpath(__file__)) +'/templates/'
+#TPATH = '/var/www/virtual/9p.org.ua/htdocs/r/templates/'
 
+URL = 'http://9p.org.ua/r/'
 
 class Resolver:
     @cherrypy.expose
-    def r(self, u=None):
+    def index(self, u=None):
         mako.runtime.UNDEFINED = ''
         if u:  # parameter with a URL to resolve
             try:
@@ -23,9 +25,6 @@ class Resolver:
             return Template(filename=TPATH + 'i.html').render()
 
 
-#cherrypy.quickstart(Resolver())
-
-
 def setup_server():
     # Set up site-wide config. Do this first so that,
     # if something goes wrong, we get a log.
@@ -36,3 +35,12 @@ def setup_server():
     #                        'show_tracebacks': True})
 
     cherrypy.tree.mount(Resolver())
+
+# For locall debug
+if __name__ == '__main__':
+   cherrypy.config.update({
+                           #'server.socket_host': '151.236.4.7',
+                           'server.socket_port': 8080,
+                           'show_tracebacks': True
+                         })
+   cherrypy.quickstart(Resolver())
